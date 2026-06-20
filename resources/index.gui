@@ -1,19 +1,72 @@
-<svg viewport-fill="#000000">
-  <!-- Decorative turntable platter -->
-  <circle id="platter" cx="50%" cy="38%" r="120" fill="#111111" />
-  <circle cx="50%" cy="38%" r="118" fill="none" stroke="#1db954" stroke-width="2" />
-  <circle cx="50%" cy="38%" r="14" fill="#1db954" />
+<svg viewport-fill="#05060A">
 
-  <!-- Time -->
-  <text id="timeLabel" class="time" x="50%" y="40%">00:00</text>
+  <!-- ============================ LIVE FACE ============================ -->
+  <g id="live">
+    <!-- subtle radial ground: lighter near the time, fading to true black -->
+    <gradientRect x="0" y="0" width="336" height="336"
+      gradient-type="radial"
+      gradient-x1="168" gradient-y1="134" gradient-x2="168" gradient-y2="336"
+      gradient-color1="#0A0D14" gradient-color2="#05060A" />
+    <!-- faint cyan inner bloom -->
+    <gradientRect x="0" y="0" width="336" height="336"
+      gradient-type="radial"
+      gradient-x1="168" gradient-y1="134" gradient-x2="168" gradient-y2="300"
+      gradient-color1="#1FE3FF" gradient-color2="#05060A"
+      gradient-opacity1="0.07" gradient-opacity2="0" />
 
-  <!-- Date -->
-  <text id="dateLabel" class="date" x="50%" y="58%">--- -- ---</text>
+    <!-- faint CRT scanline texture -->
+    <image href="scanlines.png" x="0" y="0" width="336" height="336" />
 
-  <!-- Stats row: heart rate + steps -->
-  <text id="hrLabel" class="stat statLeft" x="28%" y="82%">--</text>
-  <text id="stepsLabel" class="stat statRight" x="72%" y="82%">0</text>
+    <!-- Top row: date (left) and weather (right).
+         The whole weather group is hidden by app/index.js when no data arrives. -->
+    <text id="dateVal" class="date" x="24" y="42">SAT 20</text>
+    <g id="weather">
+      <image id="wxIcon" href="ic_wx_partly_cloudy.png" x="244" y="25" width="22" height="22" />
+      <text id="tempVal" class="temp" x="312" y="42">64°</text>
+    </g>
 
-  <text class="statLabel statLeft" x="28%" y="88%">BPM</text>
-  <text class="statLabel statRight" x="72%" y="88%">STEPS</text>
+    <!-- Hero time: stacked cyan + magenta glow copies, then crisp digits -->
+    <text id="timeGlow2" class="time glow2" x="168" y="150">22:47</text>
+    <text id="timeGlow1" class="time glow1" x="168" y="150">22:47</text>
+    <text id="colonGlow" class="time colonGlow" x="168" y="150">22:47</text>
+    <text class="time" x="168" y="150"><tspan id="hh">22</tspan><tspan class="colon">:</tspan><tspan id="mm">47</tspan></text>
+
+    <!-- cyan -> magenta accent rule -->
+    <gradientRect x="141" y="171" width="54" height="2"
+      gradient-type="linear"
+      gradient-x1="141" gradient-y1="0" gradient-x2="195" gradient-y2="0"
+      gradient-color1="#1FE3FF" gradient-color2="#FF2E88" />
+
+    <!-- Stats trio: steps (cyan), heart rate (magenta, pulsing), calories (cyan) -->
+    <image href="ic_steps.png" x="52" y="196" width="24" height="24" />
+    <text id="stepsVal" class="statVal" x="64" y="234">8,432</text>
+    <text class="statLabel" x="64" y="250">STEPS</text>
+
+    <g transform="translate(168,208)">
+      <g>
+        <animateTransform attributeName="transform" type="scale" begin="0"
+          dur="1.3" repeatDur="indefinite"
+          values="1;1.25;1;1.14;1;1;1" keyTimes="0;0.08;0.16;0.24;0.32;0.65;1" />
+        <image href="ic_heart.png" x="-12" y="-12" width="24" height="24" />
+      </g>
+    </g>
+    <text id="hrVal" class="statVal" x="168" y="234">68</text>
+    <text class="statLabel" x="168" y="250">BPM</text>
+
+    <image href="ic_flame.png" x="260" y="196" width="24" height="24" />
+    <text id="calVal" class="statVal" x="272" y="234">1,840</text>
+    <text class="statLabel" x="272" y="250">KCAL</text>
+
+    <!-- Hairline micro-row: distance / SpO2 / battery -->
+    <text id="microRow" class="micro" x="168" y="300">3.9 MI    SpO2 98%    BATT 82%</text>
+  </g>
+
+  <!-- ========================= ALWAYS-ON VIEW ========================= -->
+  <!-- Hidden by default; shown by app/index.js when display.aodActive.
+       Thin dim-cyan time + heart rate only — no magenta, glow or scanlines. -->
+  <g id="aod" display="none">
+    <text class="aodTime" x="168" y="140"><tspan id="aodHh">22</tspan><tspan class="aodColon">:</tspan><tspan id="aodMm">47</tspan></text>
+    <image href="ic_heart_aod.png" x="125" y="170" width="20" height="20" />
+    <text id="aodHr" class="aodHr" x="151" y="186">68 BPM</text>
+  </g>
 </svg>

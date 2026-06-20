@@ -1,32 +1,35 @@
 {
   "name": "dj-watchface",
-  "version": "1.0.0",
-  "description": "A DJ-themed clock face for Fitbit Versa 4",
+  "version": "1.1.0",
+  "description": "Neon City — a cyberpunk neon clock face for Fitbit Versa 4",
   "private": true,
   "scripts": {
     "build": "fitbit-build",
-    "debug": "fitbit"
+    "debug": "fitbit",
+    "gen-assets": "node scripts/gen-assets.js",
+    "test": "node --test"
   },
   "devDependencies": {
-    "@fitbit/sdk": "~6.2.0",
-    "@fitbit/sdk-cli": "^1.7.3"
+    "@fitbit/sdk": "~6.2.0-pre.1",
+    "@fitbit/sdk-cli": "~1.8.0-pre.10"
   },
   "fitbit": {
     "appUUID": "66558ccf-eb27-4c82-a3b1-9e082a7d52be",
     "appType": "clockface",
-    "appDisplayName": "DJ Watchface",
+    "appDisplayName": "Neon City",
     "iconFile": "resources/icon.png",
-    "wipeColor": "#000000",
+    "wipeColor": "#05060A",
     "requestedPermissions": [
       "access_activity",
-      "access_heart_rate"
+      "access_heart_rate",
+      "access_aod"
     ],
     "buildTargets": [
-      "atlas"
+      "hera"
     ],
     "i18n": {
       "en": {
-        "name": "DJ Watchface"
+        "name": "Neon City"
       }
     }
   }
