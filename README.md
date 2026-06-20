@@ -12,7 +12,8 @@ supporting trio of steps / heart rate / calories over a hairline micro-row
 app/index.js          # Device-side clock face logic (time, stats, HR, AOD)
 common/utils.js       # Shared helpers (zeroPad, commas, date, miles)
 resources/
-  index.gui           # SVG layout — #live + #aod groups
+  index.view          # SVG layout — #live + #aod groups (SDK >= 5 entry file)
+  widget.defs         # system-widget imports (required by SDK >= 5; none used here)
   styles.css          # Styling (auto-applied)
   *.png               # Generated assets (see scripts/gen-assets.js)
 scripts/gen-assets.js # Procedurally generates all PNGs (icons, scanlines, app icon)
@@ -79,7 +80,7 @@ or scanlines) is wired via the `display` API and the `access_aod` permission.
 
 - **Colors** — edit the palette in `scripts/gen-assets.js` (then `npm run gen-assets`)
   and `resources/styles.css`.
-- **Layout** — edit `resources/index.gui` (absolute coordinates on the 336×336 screen).
+- **Layout** — edit `resources/index.view` (absolute coordinates on the 336×336 screen).
 - **Icons** — the steps / heart / flame / weather glyphs are drawn procedurally in
   `scripts/gen-assets.js`; tweak the shape predicates and regenerate.
 - **Data** — `app/index.js` reads steps/calories/distance from `user-activity`, BPM

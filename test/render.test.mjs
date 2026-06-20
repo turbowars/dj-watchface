@@ -15,12 +15,12 @@ import { dirname, join } from "node:path";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const read = (rel) => readFileSync(join(root, rel), "utf8");
 
-const gui = read("resources/index.gui");
+const view = read("resources/index.view");
 const css = read("resources/styles.css");
 const app = read("app/index.js");
 
 const idsIn = (s) => new Set([...s.matchAll(/id="([^"]+)"/g)].map((m) => m[1]));
-const guiIds = idsIn(gui);
+const viewIds = idsIn(view);
 
 test("layout defines every element the design needs", () => {
   const required = [
@@ -30,7 +30,7 @@ test("layout defines every element the design needs", () => {
     "aodHh", "aodMm", "aodHr",
   ];
   for (const id of required) {
-    assert.ok(guiIds.has(id), `index.gui is missing element id="${id}"`);
+    assert.ok(viewIds.has(id), `index.view is missing element id="${id}"`);
   }
 });
 
@@ -38,12 +38,12 @@ test("every id the app updates exists in the layout", () => {
   const used = [...app.matchAll(/getElementById\(["']([^"']+)["']\)/g)].map((m) => m[1]);
   assert.ok(used.length >= 8, "expected the app to wire up several elements");
   for (const id of used) {
-    assert.ok(guiIds.has(id), `app/index.js uses #${id} but it's not in index.gui`);
+    assert.ok(viewIds.has(id), `app/index.js uses #${id} but it's not in index.view`);
   }
 });
 
 test("every image referenced in the layout exists on disk", () => {
-  const refs = [...gui.matchAll(/href="([^"]+\.png)"/g)].map((m) => m[1]);
+  const refs = [...view.matchAll(/href="([^"]+\.png)"/g)].map((m) => m[1]);
   assert.ok(refs.length >= 4, "expected the scanlines + 3 stat icons");
   for (const ref of refs) {
     assert.ok(existsSync(join(root, "resources", ref)), `missing asset resources/${ref}`);
@@ -53,11 +53,11 @@ test("every image referenced in the layout exists on disk", () => {
 test("every CSS class used in the layout has a rule", () => {
   const defined = new Set([...css.matchAll(/\.([A-Za-z][\w-]*)\s*\{/g)].map((m) => m[1]));
   const used = new Set();
-  for (const m of gui.matchAll(/class="([^"]+)"/g)) {
+  for (const m of view.matchAll(/class="([^"]+)"/g)) {
     m[1].split(/\s+/).forEach((c) => c && used.add(c));
   }
   for (const c of used) {
-    assert.ok(defined.has(c), `class "${c}" is used in index.gui but not defined in styles.css`);
+    assert.ok(defined.has(c), `class "${c}" is used in index.view but not defined in styles.css`);
   }
 });
 

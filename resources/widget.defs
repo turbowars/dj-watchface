@@ -1,0 +1,8 @@
+<svg>
+  <defs>
+    <!-- System widget definitions live on-device under /mnt/sysassets.
+         This face uses only plain SVG (text / image / gradientRect), so no
+         widgets are imported — but SDK >= 5 still requires this file to exist. -->
+    <link rel="import" href="/mnt/sysassets/widgets_common.defs" />
+  </defs>
+</svg>

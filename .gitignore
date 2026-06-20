@@ -12,3 +12,6 @@ server/.env
 # Local agent / harness files
 .claude/
 .fs-probe-newfile
+
+# Local design reference screenshots (not part of the watchface source)
+inspiration/
