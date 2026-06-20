@@ -1,0 +1,33 @@
+/* DJ Watchface styles */
+
+.time {
+  font-family: "System-Bold";
+  font-size: 88;
+  fill: #ffffff;
+  text-anchor: middle;
+  text-length: 32;
+}
+
+.date {
+  font-family: "System-Regular";
+  font-size: 30;
+  fill: #1db954;
+  text-anchor: middle;
+  text-length: 32;
+}
+
+.stat {
+  font-family: "System-Bold";
+  font-size: 34;
+  fill: #ffffff;
+  text-anchor: middle;
+  text-length: 8;
+}
+
+.statLabel {
+  font-family: "System-Regular";
+  font-size: 18;
+  fill: #888888;
+  text-anchor: middle;
+  text-length: 8;
+}

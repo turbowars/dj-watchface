@@ -1,0 +1,19 @@
+<svg viewport-fill="#000000">
+  <!-- Decorative turntable platter -->
+  <circle id="platter" cx="50%" cy="38%" r="120" fill="#111111" />
+  <circle cx="50%" cy="38%" r="118" fill="none" stroke="#1db954" stroke-width="2" />
+  <circle cx="50%" cy="38%" r="14" fill="#1db954" />
+
+  <!-- Time -->
+  <text id="timeLabel" class="time" x="50%" y="40%">00:00</text>
+
+  <!-- Date -->
+  <text id="dateLabel" class="date" x="50%" y="58%">--- -- ---</text>
+
+  <!-- Stats row: heart rate + steps -->
+  <text id="hrLabel" class="stat statLeft" x="28%" y="82%">--</text>
+  <text id="stepsLabel" class="stat statRight" x="72%" y="82%">0</text>
+
+  <text class="statLabel statLeft" x="28%" y="88%">BPM</text>
+  <text class="statLabel statRight" x="72%" y="88%">STEPS</text>
+</svg>

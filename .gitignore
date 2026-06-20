@@ -1,0 +1,10 @@
+node_modules/
+build/
+.fitbit/
+*.fba
+*.log
+.DS_Store
+
+# Secrets — never commit OAuth credentials
+.env
+server/.env
