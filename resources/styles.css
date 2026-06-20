@@ -1,33 +1,99 @@
-/* DJ Watchface styles */
+/* Neon City — cyberpunk cyan x magenta on true black.
+ *
+ * On-device degradations vs. the design mockup (Fitbit OS has no SVG blur or
+ * text-shadow, and no arbitrary TTFs):
+ *   - the cyan/magenta bloom is faked with stacked low-opacity text copies
+ *     (.glow1 / .glow2 / .colonGlow) sitting behind the crisp time.
+ *   - the squared "Chakra Petch" look is approximated with System-Bold; the
+ *     browser preview uses the real font.
+ * The cyan->magenta accent rule is a real <gradientRect> in index.gui.
+ */
 
+/* ===== hero time ===== */
 .time {
   font-family: "System-Bold";
-  font-size: 88;
-  fill: #ffffff;
+  font-size: 82;
+  fill: #eaf6ff;
   text-anchor: middle;
-  text-length: 32;
+}
+/* magenta colon between HH and MM */
+.colon {
+  fill: #ff2e88;
+}
+/* stacked cyan bloom behind the time (widest+dimmest, then tighter+brighter) */
+.glow2 {
+  fill: #1fe3ff;
+  opacity: 0.14;
+}
+.glow1 {
+  fill: #1fe3ff;
+  opacity: 0.3;
+}
+/* magenta bloom copy — only the colon reads through under the crisp layer */
+.colonGlow {
+  fill: #ff2e88;
+  opacity: 0.22;
 }
 
+/* ===== top row ===== */
 .date {
-  font-family: "System-Regular";
-  font-size: 30;
-  fill: #1db954;
-  text-anchor: middle;
-  text-length: 32;
-}
-
-.stat {
   font-family: "System-Bold";
-  font-size: 34;
-  fill: #ffffff;
-  text-anchor: middle;
-  text-length: 8;
+  font-size: 20;
+  fill: #5c6675;
+  text-anchor: start;
+}
+.temp {
+  font-family: "System-Bold";
+  font-size: 20;
+  fill: #9aa6b3;
+  text-anchor: end;
 }
 
+/* ===== stats trio ===== */
+.statVal {
+  font-family: "System-Bold";
+  font-size: 19;
+  fill: #eaf6ff;
+  text-anchor: middle;
+}
+/* icon colors are baked into the PNGs; these stay for the palette + optional use */
+.cyan {
+  fill: #1fe3ff;
+}
+.magenta {
+  fill: #ff2e88;
+}
 .statLabel {
   font-family: "System-Regular";
-  font-size: 18;
-  fill: #888888;
+  font-size: 9;
+  fill: #5c6675;
   text-anchor: middle;
-  text-length: 8;
+  letter-spacing: 1.5;
+}
+
+/* ===== hairline micro-row ===== */
+.micro {
+  font-family: "System-Regular";
+  font-size: 10;
+  fill: #475260;
+  text-anchor: middle;
+  letter-spacing: 0.5;
+}
+
+/* ===== Always-On (dimmed) view ===== */
+/* thin, ~50%-luminance dim cyan; no magenta, no glow stack, sparse pixels */
+.aodTime {
+  font-family: "System-Light";
+  font-size: 52;
+  fill: #767c82; /* dim ~50%-luminance white */
+  text-anchor: middle;
+}
+.aodColon {
+  fill: #0f8fa0; /* dim cyan */
+}
+.aodHr {
+  font-family: "System-Light";
+  font-size: 18;
+  fill: #5c6675;
+  text-anchor: start;
 }

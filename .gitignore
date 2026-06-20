@@ -8,3 +8,7 @@ build/
 # Secrets — never commit OAuth credentials
 .env
 server/.env
+
+# Local agent / harness files
+.claude/
+.fs-probe-newfile
