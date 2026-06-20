@@ -48,11 +48,26 @@ const aodHh = document.getElementById("aodHh");
 const aodMm = document.getElementById("aodMm");
 const aodHr = document.getElementById("aodHr");
 
-// Weather and SpO2 have no clock-face API on Fitbit, so they stay static. The
-// temperature is written once here and never changes.
+// SpO2 has no clock-face API on Fitbit, so it stays a static placeholder.
 const SPO2 = "98%";
-const WEATHER_F = "64°";
-document.getElementById("tempVal").text = WEATHER_F;
+
+// --- Weather ---------------------------------------------------------------
+// Weather also has no native Fitbit API: a companion app would fetch it and
+// push it to the watch over the Messaging API. Until a reading actually arrives
+// we have no data, so we hide the ENTIRE weather group (icon + temperature)
+// rather than show a stale or placeholder value. Wire a companion to call
+// setWeather({ tempText: "64°" }) when real data comes through.
+const weather = document.getElementById("weather");
+const tempVal = document.getElementById("tempVal");
+
+function setWeather(data) {
+  const hasData = data && data.tempText;
+  weather.style.display = hasData ? "inline" : "none";
+  if (hasData) tempVal.text = data.tempText;
+}
+
+// No companion is connected, so no data comes through → weather starts hidden.
+setWeather(null);
 
 // The face shows only HH:MM, so we wake once a minute instead of once a second
 // (~60x fewer JS-runtime wake-ups, i.e. meaningfully better battery life).

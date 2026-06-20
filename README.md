@@ -59,7 +59,10 @@ design in a few documented ways:
   squared "Chakra Petch" look is rendered with built-in `System-Bold`. The browser
   preview uses the real Chakra Petch via Google Fonts.
 - **Accent rule** — a real `<gradientRect>` (Fitbit's gradient primitive), squared ends.
-- **Weather / SpO₂** — static placeholders; no clock-face API exposes them on Fitbit.
+- **Weather** — no clock-face API exposes it; a companion would push it over the
+  Messaging API. Until real data arrives the **entire weather section is hidden**
+  (no stale placeholder) — see `setWeather()` in `app/index.js`. **SpO₂** stays a
+  static placeholder for now.
 
 ## Always-On display (AOD)
 

@@ -61,6 +61,8 @@
     .top { display: flex; justify-content: space-between; align-items: center; }
     .top .date { font-size: 13px; font-weight: 500; letter-spacing: 2px; color: var(--muted); }
     .top .weather { display: flex; align-items: center; gap: 5px; }
+    /* hide the whole weather section when no data is available */
+    .device.no-weather .weather { display: none; }
     .top .material-symbols-outlined { font-size: 16px; color: var(--muted); }
     .top .temp { font-size: 13px; font-weight: 500; color: var(--temp); }
 
@@ -177,11 +179,13 @@
     <label><input type="checkbox" id="glow" checked /> Ambient glow</label>
     <label><input type="checkbox" id="scan" checked /> Scanlines</label>
     <label><input type="checkbox" id="aod" /> Always-On</label>
+    <label><input type="checkbox" id="wx" checked /> Weather</label>
   </div>
   <p class="note">
     Preview of the <strong>Neon City</strong> face (336×336). On-device, the cyan/magenta bloom is faked
     with layered text (no SVG blur), the accent rule is a <code>gradientRect</code>, and the time uses
-    <code>System-Bold</code> in place of Chakra&nbsp;Petch. Sensors are simulated; weather &amp; SpO₂ are static.
+    <code>System-Bold</code> in place of Chakra&nbsp;Petch. Sensors are simulated; SpO₂ is static and the
+    weather section hides when no data is available (toggle <em>Weather</em> above).
   </p>
 
   <script>
@@ -193,7 +197,7 @@
 
     const $ = (id) => document.getElementById(id);
     const device = $("device");
-    const fmt12 = $("fmt12"), glow = $("glow"), scan = $("scan"), aod = $("aod");
+    const fmt12 = $("fmt12"), glow = $("glow"), scan = $("scan"), aod = $("aod"), wx = $("wx");
 
     // Simulated sensor state (the watch reads these live; here we just drift them).
     let steps = 8432, hr = 68, cal = 1840, batt = 82;
@@ -204,8 +208,9 @@
       device.classList.toggle("no-glow", !glow.checked);
       device.classList.toggle("no-scan", !scan.checked);
       device.classList.toggle("show-aod", aod.checked);
+      device.classList.toggle("no-weather", !wx.checked); // unchecked = no data → hidden
     }
-    [fmt12, glow, scan, aod].forEach((el) => el.addEventListener("change", () => { syncToggles(); tick(); }));
+    [fmt12, glow, scan, aod, wx].forEach((el) => el.addEventListener("change", () => { syncToggles(); tick(); }));
 
     // One animation frame's worth of update: clock, then drifting fake sensors.
     function tick() {

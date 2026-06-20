@@ -17,10 +17,13 @@
     <!-- faint CRT scanline texture -->
     <image href="scanlines.png" x="0" y="0" width="336" height="336" />
 
-    <!-- Top row: date (left) and weather (right) -->
+    <!-- Top row: date (left) and weather (right).
+         The whole weather group is hidden by app/index.js when no data arrives. -->
     <text id="dateVal" class="date" x="24" y="42">SAT 20</text>
-    <image id="wxIcon" href="ic_wx_partly_cloudy.png" x="244" y="25" width="22" height="22" />
-    <text id="tempVal" class="temp" x="312" y="42">64°</text>
+    <g id="weather">
+      <image id="wxIcon" href="ic_wx_partly_cloudy.png" x="244" y="25" width="22" height="22" />
+      <text id="tempVal" class="temp" x="312" y="42">64°</text>
+    </g>
 
     <!-- Hero time: stacked cyan + magenta glow copies, then crisp digits -->
     <text id="timeGlow2" class="time glow2" x="168" y="150">22:47</text>
