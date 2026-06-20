@@ -48,6 +48,9 @@ const aodHh = document.getElementById("aodHh");
 const aodMm = document.getElementById("aodMm");
 const aodHr = document.getElementById("aodHr");
 
+hrVal.text = "--";
+aodHr.text = "-- BPM";
+
 // SpO2 has no clock-face API on Fitbit, so it stays a static placeholder.
 const SPO2 = "98%";
 
@@ -114,7 +117,7 @@ function updateStats() {
 
   const mi = util.miles(a.distance || 0);
   const batt = Math.round(battery.chargeLevel);
-  microRow.text = `${mi} MI    SpO2 ${SPO2}    BATT ${batt}%`;
+  microRow.text = `${mi} MI · SpO2 ${SPO2} · BATT ${batt}%`;
 }
 
 // --- Heart rate ------------------------------------------------------------
