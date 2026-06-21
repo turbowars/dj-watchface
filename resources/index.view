@@ -31,13 +31,9 @@
       <text id="tempVal" class="temp" x="312" y="42" text-length="5">64°</text>
     </g>
 
-    <!-- Hero time: faint System-Bold glow copies (single strings) for the cyan
-         bloom, then the crisp time as pre-rendered Chakra Petch digit images.
-         Fitbit OS can't embed TTFs, so the numerals are PNG glyphs (see
-         resources/digit-*.png / colon.png); app/index.js swaps each slot's href. -->
-    <text id="timeGlow2" class="time glow2" x="168" y="150" text-anchor="middle" text-length="5">22:47</text>
-    <text id="timeGlow1" class="time glow1" x="168" y="150" text-anchor="middle" text-length="5">22:47</text>
-    <text id="colonGlow" class="time colonGlow" x="168" y="150" text-anchor="middle" text-length="5">22:47</text>
+    <!-- Hero time: pre-rendered Chakra Petch digit images (Fitbit OS can't embed
+         TTFs, so the numerals are PNG glyphs in resources/digit-*.png / colon.png).
+         app/index.js swaps each slot's href per tick. -->
     <image id="h1" href="digit-2.png" x="58" y="73" width="48" height="96" />
     <image id="h2" href="digit-2.png" x="106" y="73" width="48" height="96" />
     <image href="colon.png" x="154" y="73" width="28" height="96" />

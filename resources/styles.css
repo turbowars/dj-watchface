@@ -1,39 +1,12 @@
 /* Neon City — cyberpunk cyan x magenta on true black.
  *
  * Fitbit OS constraints baked into these rules:
- *   - no SVG blur / text-shadow → the glow is faked with stacked low-opacity
- *     copies of the time (.glow1 / .glow2 / .colonGlow) behind the crisp digits.
- *   - no <tspan> → the time is three separate <text> elements (hh, colon, mm),
- *     so .time carries no text-anchor (each element sets its own as an attribute).
+ *   - the hero HH:MM is pre-rendered Chakra Petch glyph images (Fitbit can't embed
+ *     TTFs), so the time isn't styled here — see index.view / app/index.js.
+ *   - the small text below uses the built-in System-Bold / System-Regular.
  *   - letter-spacing must be an integer ("short"), not fractional.
- *   - no arbitrary TTFs → System-Bold approximates the squared "Chakra Petch".
  *   styles.css is linked from index.view's <defs> (Fitbit does not auto-apply it).
  */
-
-/* ===== hero time ===== */
-.time {
-  font-family: "System-Bold";
-  font-size: 82;
-  fill: #eaf6ff;
-}
-/* magenta colon between HH and MM */
-.colon {
-  fill: #ff2e88;
-}
-/* stacked cyan bloom behind the time (widest+dimmest, then tighter+brighter) */
-.glow2 {
-  fill: #1fe3ff;
-  opacity: 0.14;
-}
-.glow1 {
-  fill: #1fe3ff;
-  opacity: 0.3;
-}
-/* magenta bloom copy — only the colon reads through under the crisp layer */
-.colonGlow {
-  fill: #ff2e88;
-  opacity: 0.22;
-}
 
 /* ===== top row ===== */
 .date {

@@ -31,15 +31,11 @@ const live = document.getElementById("live");
 const aod = document.getElementById("aod");
 
 // Live face — the hero time is four Chakra Petch digit images (Fitbit can't
-// embed TTFs, so the numerals are pre-rendered PNG glyphs we swap by href),
-// with three faux-bloom text copies behind them for the cyan glow.
+// embed TTFs, so the numerals are pre-rendered PNG glyphs we swap by href).
 const h1 = document.getElementById("h1"); // hours tens
 const h2 = document.getElementById("h2"); // hours ones
 const m1 = document.getElementById("m1"); // minutes tens
 const m2 = document.getElementById("m2"); // minutes ones
-const timeGlow1 = document.getElementById("timeGlow1"); // brighter, tighter cyan bloom
-const timeGlow2 = document.getElementById("timeGlow2"); // dimmer, wider cyan bloom
-const colonGlow = document.getElementById("colonGlow"); // magenta bloom (only the colon reads through)
 const dateVal = document.getElementById("dateVal");
 const stepsVal = document.getElementById("stepsVal");
 const hrVal = document.getElementById("hrVal");
@@ -99,8 +95,6 @@ function renderTime(now) {
   h2.href = `digit-${hours[1]}.png`;
   m1.href = `digit-${mins[0]}.png`;
   m2.href = `digit-${mins[1]}.png`;
-  // The faint System-Bold glow copies behind the digits supply the cyan bloom.
-  timeGlow1.text = timeGlow2.text = colonGlow.text = `${hours}:${mins}`;
 
   dateVal.text = util.formatShortDate(now);
   updateStats();

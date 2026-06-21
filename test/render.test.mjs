@@ -24,7 +24,7 @@ const viewIds = idsIn(view);
 
 test("layout defines every element the design needs", () => {
   const required = [
-    "h1", "h2", "m1", "m2", "timeGlow1", "timeGlow2", "colonGlow",
+    "h1", "h2", "m1", "m2",
     "dateVal", "tempVal", "stepsVal", "hrVal", "calVal", "microRow",
     // always-on view
     "aodTime", "aodHr",
