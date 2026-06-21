@@ -76,7 +76,7 @@ scanlines) is fully implemented but currently disabled for distribution — the 
 > ⚠️ **AOD is currently disabled for distribution.** `access_aod` is authorization-gated
 > by Fitbit: it only activates in the Simulator or an authorized App Gallery build, and
 > AOD clock faces **cannot be sideloaded**. To keep this face installable via the Gallery
-> and sideload, `access_aod` is **omitted** from `requestedPermissions`. With the
+> or via sideloading, `access_aod` is **omitted** from `requestedPermissions`. With the
 > permission absent, `display.aodAvailable` is `false`, so the code stays dormant and the
 > normal live face always shows. To re-enable AOD once Fitbit grants authorization, add
 > `"access_aod"` back to `requestedPermissions` in `package.json` and rebuild — no other
