@@ -30,10 +30,13 @@ import * as util from "../common/utils";
 const live = document.getElementById("live");
 const aod = document.getElementById("aod");
 
-// Live face — crisp time digits + the three faux-bloom copies sitting behind
-// them, then the date / stats / micro-row text nodes.
-const hh = document.getElementById("hh");
-const mm = document.getElementById("mm");
+// Live face — the hero time is four Chakra Petch digit images (Fitbit can't
+// embed TTFs, so the numerals are pre-rendered PNG glyphs we swap by href),
+// with three faux-bloom text copies behind them for the cyan glow.
+const h1 = document.getElementById("h1"); // hours tens
+const h2 = document.getElementById("h2"); // hours ones
+const m1 = document.getElementById("m1"); // minutes tens
+const m2 = document.getElementById("m2"); // minutes ones
 const timeGlow1 = document.getElementById("timeGlow1"); // brighter, tighter cyan bloom
 const timeGlow2 = document.getElementById("timeGlow2"); // dimmer, wider cyan bloom
 const colonGlow = document.getElementById("colonGlow"); // magenta bloom (only the colon reads through)
@@ -79,12 +82,9 @@ clock.granularity = "minutes";
 // Format the current time per the user's 12h/24h preference and push it into
 // whichever face is currently visible.
 function renderTime(now) {
-  // 12h convention: 1–12 with no leading zero. 24h: 00–23, zero-padded.
-  // Both branches yield a string so the assignments below are type-consistent.
-  const hours =
-    preferences.clockDisplay === "12h"
-      ? `${now.getHours() % 12 || 12}`
-      : util.zeroPad(now.getHours());
+  // Always two digits so the four fixed digit slots stay filled (12h shows "09").
+  const h = preferences.clockDisplay === "12h" ? now.getHours() % 12 || 12 : now.getHours();
+  const hours = util.zeroPad(h);
   const mins = util.zeroPad(now.getMinutes());
 
   // While dimmed, only the always-on time is visible — refresh it and bail out
@@ -94,10 +94,12 @@ function renderTime(now) {
     return;
   }
 
-  hh.text = hours;
-  mm.text = mins;
-  // The glow layers are plain "HH:MM" copies kept in lockstep with the crisp
-  // foreground time, so the stacked faux-bloom lines up exactly.
+  // Point each digit slot at its glyph PNG (e.g. "2" -> digit-2.png).
+  h1.href = `digit-${hours[0]}.png`;
+  h2.href = `digit-${hours[1]}.png`;
+  m1.href = `digit-${mins[0]}.png`;
+  m2.href = `digit-${mins[1]}.png`;
+  // The faint System-Bold glow copies behind the digits supply the cyan bloom.
   timeGlow1.text = timeGlow2.text = colonGlow.text = `${hours}:${mins}`;
 
   dateVal.text = util.formatShortDate(now);

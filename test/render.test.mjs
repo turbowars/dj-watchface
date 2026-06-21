@@ -24,7 +24,7 @@ const viewIds = idsIn(view);
 
 test("layout defines every element the design needs", () => {
   const required = [
-    "hh", "mm", "timeGlow1", "timeGlow2", "colonGlow",
+    "h1", "h2", "m1", "m2", "timeGlow1", "timeGlow2", "colonGlow",
     "dateVal", "tempVal", "stepsVal", "hrVal", "calVal", "microRow",
     // always-on view
     "aodTime", "aodHr",
@@ -59,6 +59,15 @@ test("every CSS class used in the layout has a rule", () => {
   for (const c of used) {
     assert.ok(defined.has(c), `class "${c}" is used in index.view but not defined in styles.css`);
   }
+});
+
+test("the full Chakra Petch time-glyph set exists on disk", () => {
+  // The four digit slots swap href at runtime, so most glyphs aren't referenced
+  // in the static layout — guard that all ten digits + the colon are present.
+  for (let d = 0; d <= 9; d++) {
+    assert.ok(existsSync(join(root, "resources", `digit-${d}.png`)), `missing resources/digit-${d}.png`);
+  }
+  assert.ok(existsSync(join(root, "resources", "colon.png")), "missing resources/colon.png");
 });
 
 test("the neon palette is present in the styles", () => {

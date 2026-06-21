@@ -31,15 +31,18 @@
       <text id="tempVal" class="temp" x="312" y="42" text-length="5">64°</text>
     </g>
 
-    <!-- Hero time: stacked cyan + magenta glow copies (single strings), then the
-         crisp time as three text elements (no <tspan> on Fitbit OS): hh, the
-         magenta colon, mm — anchored end / middle / start so they sit together. -->
+    <!-- Hero time: faint System-Bold glow copies (single strings) for the cyan
+         bloom, then the crisp time as pre-rendered Chakra Petch digit images.
+         Fitbit OS can't embed TTFs, so the numerals are PNG glyphs (see
+         resources/digit-*.png / colon.png); app/index.js swaps each slot's href. -->
     <text id="timeGlow2" class="time glow2" x="168" y="150" text-anchor="middle" text-length="5">22:47</text>
     <text id="timeGlow1" class="time glow1" x="168" y="150" text-anchor="middle" text-length="5">22:47</text>
     <text id="colonGlow" class="time colonGlow" x="168" y="150" text-anchor="middle" text-length="5">22:47</text>
-    <text id="hh" class="time" x="157" y="150" text-anchor="end" text-length="2">22</text>
-    <text class="time colon" x="168" y="150" text-anchor="middle">:</text>
-    <text id="mm" class="time" x="179" y="150" text-anchor="start" text-length="2">47</text>
+    <image id="h1" href="digit-2.png" x="58" y="73" width="48" height="96" />
+    <image id="h2" href="digit-2.png" x="106" y="73" width="48" height="96" />
+    <image href="colon.png" x="154" y="73" width="28" height="96" />
+    <image id="m1" href="digit-4.png" x="182" y="73" width="48" height="96" />
+    <image id="m2" href="digit-7.png" x="230" y="73" width="48" height="96" />
 
     <!-- cyan -> magenta accent rule -->
     <gradientRect x="141" y="171" width="54" height="2"
