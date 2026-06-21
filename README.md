@@ -60,9 +60,11 @@ design in a few documented ways:
 
 - **Glow** — there is no SVG blur / `text-shadow`, so the cyan/magenta bloom is faked
   with stacked low-opacity copies of the time (`.glow1` / `.glow2` / `.colonGlow`).
-- **Font** — arbitrary TTFs aren't supported without a bundled bitmap font, so the
-  squared "Chakra Petch" look is rendered with built-in `System-Bold`. The browser
-  preview uses the real Chakra Petch via Google Fonts.
+- **Font** — Fitbit OS can't embed TTFs (only `System-Regular/Light/Bold` exist), so
+  the hero time's numerals are **pre-rendered Chakra Petch glyph images**
+  (`resources/digit-*.png` + `colon.png`, regenerate with `scripts/gen-time-font.sh`);
+  `app/index.js` swaps each digit slot's `href`. The smaller date / stats / labels use
+  the built-in `System-Bold`.
 - **Accent rule** — a real `<gradientRect>` (Fitbit's gradient primitive), squared ends.
 - **Weather** — no clock-face API exposes it; a companion would push it over the
   Messaging API. Until real data arrives the **entire weather section is hidden**
