@@ -70,8 +70,8 @@ design in a few documented ways:
 ## Always-On display (AOD)
 
 A dimmed AOD view (thin ~50%-luminance time + heart rate only, no magenta, glow or
-scanlines) is fully implemented — the `#aod` group in `resources/index.view`, its
-styles, and the `display`-event toggling in `app/index.js`.
+scanlines) is fully implemented but currently disabled for distribution — the `#aod` group in
+`resources/index.view`, its styles, and the `display`-event toggling in `app/index.js`.
 
 > ⚠️ **AOD is currently disabled for distribution.** `access_aod` is authorization-gated
 > by Fitbit: it only activates in the Simulator or an authorized App Gallery build, and
