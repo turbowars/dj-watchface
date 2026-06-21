@@ -71,14 +71,18 @@ design in a few documented ways:
 
 ## Always-On display (AOD)
 
-The dimmed AOD view (thin ~50%-luminance time + heart rate only, no magenta, no glow
-or scanlines) is wired via the `display` API and the `access_aod` permission.
+A dimmed AOD view (thin ~50%-luminance time + heart rate only, no magenta, glow or
+scanlines) is fully implemented but currently disabled for distribution — the `#aod` group in
+`resources/index.view`, its styles, and the `display`-event toggling in `app/index.js`.
 
-> ⚠️ **AOD is authorization-gated by Fitbit.** `access_aod` requires special
-> authorization and only activates in the Fitbit OS Simulator or an authorized App
-> Gallery build — AOD clock faces **cannot be sideloaded**. On any build where AOD
-> isn't authorized, `display.aodActive` stays `false` and the normal live face is
-> shown. That fallback is by design, not a bug.
+> ⚠️ **AOD is currently disabled for distribution.** `access_aod` is authorization-gated
+> by Fitbit: it only activates in the Simulator or an authorized App Gallery build, and
+> AOD clock faces **cannot be sideloaded**. To keep this face installable via the Gallery
+> or via sideloading, `access_aod` is **omitted** from `requestedPermissions`. With the
+> permission absent, `display.aodAvailable` is `false`, so the code stays dormant and the
+> normal live face always shows. To re-enable AOD once Fitbit grants authorization, add
+> `"access_aod"` back to `requestedPermissions` in `package.json` and rebuild — no other
+> changes needed.
 
 ## Customizing
 

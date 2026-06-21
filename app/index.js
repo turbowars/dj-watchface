@@ -135,9 +135,11 @@ if (HeartRateSensor) {
 }
 
 // --- Always-on display + power management ----------------------------------
-// Opt into AOD where the device/build supports it. NOTE: access_aod is
-// authorization-gated by Fitbit and never activates on a sideloaded build, so
-// the live face is the universal fallback (see README).
+// AOD is fully implemented but currently DORMANT: the access_aod permission is
+// omitted from package.json so this face stays Gallery-installable and sideloadable
+// (access_aod is authorization-gated by Fitbit and can't be sideloaded). Without that
+// permission, display.aodAvailable is false, this block is skipped, and the live face
+// always shows. Re-add "access_aod" to requestedPermissions to enable.
 if (display.aodAvailable) {
   display.aodAllowed = true;
 }
