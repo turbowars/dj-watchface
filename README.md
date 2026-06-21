@@ -6,7 +6,9 @@ with a layered cyan bloom and a magenta colon, a cyan→magenta accent rule, and
 supporting trio of steps / heart rate / calories over a hairline micro-row
 (distance · SpO₂ · battery). Ships a dimmed **Always-On** variant.
 
-![Neon City watchface preview](preview/screenshot.png)
+<p align="center">
+  <img src="preview/screenshot.png" alt="Neon City watchface on a Fitbit Versa 4 — 22:47 with cyan glow and magenta colon, steps / heart-rate / calories trio" width="340" />
+</p>
 
 ## Project layout
 
