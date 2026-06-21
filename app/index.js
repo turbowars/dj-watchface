@@ -9,7 +9,7 @@
  *   5. swaps between the bright "live" face and the dimmed "always-on" (AOD)
  *      face, stopping the heart-rate sensor while dimmed to save power.
  *
- * The matching SVG ids live in resources/index.gui, the styling in
+ * The matching SVG ids live in resources/index.view, the styling in
  * resources/styles.css, and the pure string/number helpers in common/utils.js.
  */
 
