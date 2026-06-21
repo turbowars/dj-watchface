@@ -67,9 +67,19 @@ test("the neon palette is present in the styles", () => {
   }
 });
 
-test("the layout links the stylesheet (Fitbit OS does not auto-apply it)", () => {
-  // Without this <link>, every <text> renders with default black fill — invisible
-  // on the dark background. This was a real on-device bug.
-  assert.ok(/rel="stylesheet"/.test(view), "index.view must declare rel=\"stylesheet\"");
-  assert.ok(/href="styles\.css"/.test(view), 'index.view must <link href="styles.css"> so styles apply on-device');
+test("the layout links styles.css inside <defs> (Fitbit OS does not auto-apply it)", () => {
+  // Regression guard for a real on-device bug: without a stylesheet <link>, every
+  // <text> renders with the default black fill — invisible on the dark background.
+  // Fitbit requires the link to live inside the SVG's <defs>.
+  const defs = view.match(/<defs[\s\S]*?<\/defs>/);
+  assert.ok(defs, "index.view must have a <defs> block");
+
+  // both attributes must be on the SAME <link> element, not merely present somewhere
+  const linksStylesheet = (defs[0].match(/<link\b[^>]*>/g) || []).some(
+    (tag) => /rel\s*=\s*"stylesheet"/.test(tag) && /href\s*=\s*"styles\.css"/.test(tag),
+  );
+  assert.ok(
+    linksStylesheet,
+    'index.view <defs> must contain <link rel="stylesheet" href="styles.css"> or text renders unstyled on-device',
+  );
 });
