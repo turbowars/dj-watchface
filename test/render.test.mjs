@@ -27,7 +27,7 @@ test("layout defines every element the design needs", () => {
     "hh", "mm", "timeGlow1", "timeGlow2", "colonGlow",
     "dateVal", "tempVal", "stepsVal", "hrVal", "calVal", "microRow",
     // always-on view
-    "aodHh", "aodMm", "aodHr",
+    "aodTime", "aodHr",
   ];
   for (const id of required) {
     assert.ok(viewIds.has(id), `index.view is missing element id="${id}"`);

@@ -1,12 +1,13 @@
 /* Neon City — cyberpunk cyan x magenta on true black.
  *
- * On-device degradations vs. the design mockup (Fitbit OS has no SVG blur or
- * text-shadow, and no arbitrary TTFs):
- *   - the cyan/magenta bloom is faked with stacked low-opacity text copies
- *     (.glow1 / .glow2 / .colonGlow) sitting behind the crisp time.
- *   - the squared "Chakra Petch" look is approximated with System-Bold; the
- *     browser preview uses the real font.
- * The cyan->magenta accent rule is a real <gradientRect> in index.gui.
+ * Fitbit OS constraints baked into these rules:
+ *   - no SVG blur / text-shadow → the glow is faked with stacked low-opacity
+ *     copies of the time (.glow1 / .glow2 / .colonGlow) behind the crisp digits.
+ *   - no <tspan> → the time is three separate <text> elements (hh, colon, mm),
+ *     so .time carries no text-anchor (each element sets its own as an attribute).
+ *   - letter-spacing must be an integer ("short"), not fractional.
+ *   - no arbitrary TTFs → System-Bold approximates the squared "Chakra Petch".
+ *   styles.css is linked from index.view's <defs> (Fitbit does not auto-apply it).
  */
 
 /* ===== hero time ===== */
@@ -14,7 +15,6 @@
   font-family: "System-Bold";
   font-size: 82;
   fill: #eaf6ff;
-  text-anchor: middle;
 }
 /* magenta colon between HH and MM */
 .colon {
@@ -68,7 +68,7 @@
   font-size: 9;
   fill: #5c6675;
   text-anchor: middle;
-  letter-spacing: 1.5;
+  letter-spacing: 2;
 }
 
 /* ===== hairline micro-row ===== */
@@ -77,19 +77,16 @@
   font-size: 10;
   fill: #475260;
   text-anchor: middle;
-  letter-spacing: 0.5;
+  letter-spacing: 1;
 }
 
 /* ===== Always-On (dimmed) view ===== */
-/* thin, ~50%-luminance dim cyan; no magenta, no glow stack, sparse pixels */
+/* thin, ~50%-luminance dim white; sparse pixels, single text element */
 .aodTime {
   font-family: "System-Light";
   font-size: 52;
-  fill: #767c82; /* dim ~50%-luminance white */
+  fill: #767c82;
   text-anchor: middle;
-}
-.aodColon {
-  fill: #0f8fa0; /* dim cyan */
 }
 .aodHr {
   font-family: "System-Light";

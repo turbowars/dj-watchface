@@ -44,8 +44,7 @@ const calVal = document.getElementById("calVal");
 const microRow = document.getElementById("microRow");
 
 // Always-on face — a thinner, dimmer time plus a single heart-rate line.
-const aodHh = document.getElementById("aodHh");
-const aodMm = document.getElementById("aodMm");
+const aodTime = document.getElementById("aodTime");
 const aodHr = document.getElementById("aodHr");
 
 hrVal.text = "--";
@@ -91,8 +90,7 @@ function renderTime(now) {
   // While dimmed, only the always-on time is visible — refresh it and bail out
   // early; redrawing the hidden live face would be wasted work.
   if (display.aodActive) {
-    aodHh.text = hours;
-    aodMm.text = mins;
+    aodTime.text = `${hours}:${mins}`;
     return;
   }
 
@@ -135,14 +133,11 @@ if (HeartRateSensor) {
 }
 
 // --- Always-on display + power management ----------------------------------
-// AOD is fully implemented but currently DORMANT: the access_aod permission is
-// omitted from package.json so this face stays Gallery-installable and sideloadable
-// (access_aod is authorization-gated by Fitbit and can't be sideloaded). Without that
-// permission, display.aodAvailable is false, this block is skipped, and the live face
-// always shows. Re-add "access_aod" to requestedPermissions to enable.
-if (display.aodAvailable) {
-  display.aodAllowed = true;
-}
+// AOD is implemented but DISABLED for distribution: access_aod is omitted from
+// package.json (it's authorization-gated by Fitbit and blocks sideloading). With
+// the permission absent, display.aodActive never becomes true, so the live face
+// always shows. To re-enable AOD: add "access_aod" back to requestedPermissions
+// AND set `display.aodAllowed = true` here.
 
 // Show the correct face for the current display state and gate the HR sensor.
 // Runs on every display "change" event and once at startup.

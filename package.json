@@ -1,6 +1,6 @@
 {
   "name": "dj-watchface",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Neon City — a cyberpunk neon clock face for Fitbit Versa 4",
   "private": true,
   "scripts": {
@@ -24,7 +24,8 @@
       "access_heart_rate"
     ],
     "buildTargets": [
-      "hera"
+      "hera",
+      "atlas"
     ],
     "i18n": {
       "en": {
