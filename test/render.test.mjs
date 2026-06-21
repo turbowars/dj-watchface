@@ -66,3 +66,10 @@ test("the neon palette is present in the styles", () => {
     assert.ok(css.toLowerCase().includes(hex), `styles.css should use ${hex}`);
   }
 });
+
+test("the layout links the stylesheet (Fitbit OS does not auto-apply it)", () => {
+  // Without this <link>, every <text> renders with default black fill — invisible
+  // on the dark background. This was a real on-device bug.
+  assert.ok(/rel="stylesheet"/.test(view), "index.view must declare rel=\"stylesheet\"");
+  assert.ok(/href="styles\.css"/.test(view), 'index.view must <link href="styles.css"> so styles apply on-device');
+});

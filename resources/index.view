@@ -1,5 +1,11 @@
 <svg viewport-fill="#05060A">
 
+  <!-- Fitbit OS does NOT auto-apply styles.css — it must be linked here, or
+       every <text> falls back to black fill (invisible on the dark ground). -->
+  <defs>
+    <link rel="stylesheet" href="styles.css" />
+  </defs>
+
   <!-- ============================ LIVE FACE ============================ -->
   <g id="live">
     <!-- subtle radial ground: lighter near the time, fading to true black -->
